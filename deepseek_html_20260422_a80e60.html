@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sipadi.id - Pusat Kendali Pertanian Cerdas & Syariah</title>
+    <!-- Google Fonts + Font Awesome + QR Code Library -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafef7;
+            color: #1a2e1f;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .bg-soft-green {
+            background-color: #f0f9ef;
+        }
+
+        .btn-primary {
+            background: #2b6e3c;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #1f542d;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -12px rgba(43,110,60,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #2b6e3c;
+            color: #2b6e3c;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: #2b6e3c;
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+            transition: all 0.25s ease;
+            height: 100%;
+            border: 1px solid #e2f0e0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 40px -16px rgba(33, 94, 41, 0.2);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subhead {
+            color: #47624f;
+            max-width: 700px;
+            margin-bottom: 3rem;
+            font-size: 1.15rem;
+        }
+
+        .navbar {
+            padding: 20px 0;
+            background: white;
+            border-bottom: 1px solid #e2f0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background: rgba(255,255,255,0.96);
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1f542d;
+        }
+
+        .logo span {
+            color: #f4b942;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a2a;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2b6e3c;
+        }
+
+        .hero {
+            padding: 60px 0 40px;
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1.2;
+        }
+        .hero-visual {
+            flex: 0.9;
+            background: linear-gradient(135deg, #d9f0d4, #c2e2bb);
+            border-radius: 48px;
+            padding: 32px;
+            text-align: center;
+        }
+        .badge {
+            background: #eef6e9;
+            color: #1e5a2f;
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 3.3rem;
+            line-height: 1.2;
+            margin: 20px 0;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .icon-feature {
+            font-size: 2.4rem;
+            color: #2b6e3c;
+            margin-bottom: 20px;
+        }
+        .qr-section {
+            background: white;
+            border-radius: 32px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+        .qr-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .qr-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        #qrcode {
+            display: inline-block;
+            margin: 10px auto;
+        }
+        .btn-download {
+            background: #1f542d;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .site-link-card {
+            background: #eef3ea;
+            padding: 18px 24px;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer {
+            background: #0c2b15;
+            color: #cfdec8;
+            padding: 48px 0 32px;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: #c0e0b5;
+            text-decoration: none;
+        }
+        @media (max-width: 780px) {
+            .nav-flex {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="logo">sipadi<span>.id</span></div>
+        <div class="nav-links">
+            <a href="#">Beranda</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#marketplace">Marketplace</a>
+            <a href="#edukasi">E-Learning</a>
+            <a href="#konsultasi">Konsultasi</a>
+            <a href="#" class="btn-outline" style="padding: 8px 20px;"><i class="fas fa-user-circle"></i> Masuk</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <div class="badge"><i class="fas fa-leaf"></i> Pusat Kendali Pertanian 4.0</div>
+            <h1>Kendali cerdas sawahmu, <br> jual hasil panen terpercaya</h1>
+            <p style="font-size: 1.2rem; color: #2a4932; margin: 24px 0 32px;">Kalender tanam digital, kendali alat jarak jauh, marketplace dengan lacak produk, dan sistem pembayaran syariah — semua dalam satu platform ramah petani & konsumen.</p>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="#dashboard" class="btn-primary"><i class="fas fa-tachometer-alt"></i> Jelajahi Dashboard</a>
+                <a href="#marketplace" class="btn-outline"><i class="fas fa-store"></i> Belanja Produk</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <i class="fas fa-seedling" style="font-size: 4rem; color: #2b6e3c; opacity: 0.8;"></i>
+            <h3 style="margin: 16px 0 8px;">Sawah Pintar</h3>
+            <p style="font-size: 0.9rem;">Kendali irigasi & pompa dari jarak jauh</p>
+            <div style="margin-top: 20px; background: #fff9ea; border-radius: 32px; padding: 12px; display: inline-block;"><i class="fas fa-calendar-alt"></i> Kalender tanam digital: padi, jagung, cabai</div>
+        </div>
+    </div>
+</section>
+
+<!-- DASHBOARD PINTAR PETANI + KENDALI JARAK JAUH -->
+<section id="dashboard" class="bg-soft-green">
+    <div class="container">
+        <div style="text-align: center;">
+            <span class="badge" style="background: #d9e8d4;"><i class="fas fa-chalkboard-user"></i> Smart Dashboard Petani</span>
+            <h2>Dashboard pintar · kendali penuh di tanganmu</h2>
+            <div class="section-subhead">Akses kalender tanam digital, pantau kelembaban, dan aktifkan alat di sawah secara remote. Ramah untuk semua kalangan.</div>
+        </div>
+        <div class="feature-grid">
+            <div class="card">
+                <div class="icon-feature"><i class="fas fa-calendar-week"></i></div>
+                <h3>Kalender Tanam Digital</h3>
+                <p>Jadwal tanam berdasarkan musim & prediksi cuaca. Notifikasi waktu pemupukan, panen, serta rotasi tanaman untuk hasil optimal.</p>
+            </div>
+            <div class="card">
+                <div class="icon-feature"><i class="fas fa-microchip"></i></div>
+                <h3>Kendali Jarak Jauh</h3>
+                <p>Aktifkan pompa air, irigasi tetes, atau aerator dari smartphone. Satu sentuhan untuk menghemat waktu dan tenaga di sawah.</p>
+                <div style="margin-top: 12px;"><i class="fas fa-wifi"></i> <small>IoT terintegrasi</small></div>
+            </div>
+            <div class="card">
+                <div class="icon-feature"><i class="fas fa-chart-line"></i></div>
+                <h3>Monitoring Real-time</h3>
+                <p>Sensor tanah & iklim memberikan data langsung. Dashboard user-friendly menampilkan grafik sederhana untuk memudahkan petani.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARKETPLACE + KETERLACAKAN + PEMBAYARAN SYARIAH -->
+<section id="marketplace">
+    <div class="container">
+        <div style="text-align: center;">
+            <span class="badge" style="background: #fef0db;"><i class="fas fa-store"></i> Marketplace Amanah</span>
+            <h2>Marketplace dengan fitur keterlacakan produk</h2>
+            <div class="section-subhead">Dari petani ke meja makanmu — setiap hasil pertanian bisa dilacak asal-usulnya. Jaminan transparansi & sistem pembayaran syariah.</div>
+        </div>
+        <div class="feature-grid">
+            <div class="card marketplace-badge" style="border-left: 4px solid #f4b942;">
+                <div class="icon-feature"><i class="fas fa-search-location"></i></div>
+                <h3>Lacak Produk (Traceability)</h3>
+                <p>Scan QR atau kode batch: tahu lokasi sawah, metode tanam, waktu panen, dan sertifikat keberlanjutan. Kepercayaan tanpa batas.</p>
+            </div>
+            <div class="card payment-badge" style="border-left: 4px solid #2b6e3c;">
+                <div class="icon-feature"><i class="fas fa-hand-holding-usd"></i></div>
+                <h3>Sistem Pembayaran Syariah</h3>
+                <p>Akad jual beli yang jelas, tanpa riba, dengan rekening terpisah (escrow). Setiap aliran dana masuk & keluar tercatat transparan dan diaudit syariah.</p>
+            </div>
+            <div class="card">
+                <div class="icon-feature"><i class="fas fa-tractor"></i></div>
+                <h3>Petani Partner Resmi</h3>
+                <p>Ratusan petani dari berbagai daerah memasarkan hasil organik & konvensional. Konsumen mendapat harga adil.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LAYANAN KONSULTASI PAKAR -->
+<section id="konsultasi" class="bg-soft-green">
+    <div class="container">
+        <div style="text-align: center;">
+            <span class="badge"><i class="fas fa-user-graduate"></i> Tanya Pakar</span>
+            <h2>Konsultasi dengan ahli pertanian & agritech</h2>
+            <div class="section-subhead">Chat, video call, atau forum bersama pakar berpengalaman.</div>
+        </div>
+        <div style="display: flex; gap: 28px; flex-wrap: wrap; justify-content: center;">
+            <div class="card" style="flex: 1; text-align: center;">
+                <i class="fas fa-comments" style="font-size: 2rem; color: #2b6e3c;"></i>
+                <h3 style="margin: 12px 0;">Konsultasi Instan</h3>
+                <p>Chat 24/7 dengan agronomis dan teknisi IoT.</p>
+                <button class="btn-outline" style="margin-top: 20px;">Mulai Chat</button>
+            </div>
+            <div class="card" style="flex: 1; text-align: center;">
+                <i class="fas fa-chalkboard" style="font-size: 2rem; color: #2b6e3c;"></i>
+                <h3 style="margin: 12px 0;">Webinar Pakar</h3>
+                <p>Teknik pertanian berkelanjutan & digitalisasi lahan.</p>
+                <button class="btn-outline" style="margin-top: 20px;">Lihat Jadwal</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- E-LEARNING AGRICULTURE & QR CODE + LINK WEBSITE -->
+<section id="edukasi">
+    <div class="container">
+        <div style="text-align: center;">
+            <span class="badge" style="background: #e6f2e1;"><i class="fas fa-graduation-cap"></i> E-Learning Agriculture</span>
+            <h2>Akses ribuan konten video & artikel <br> teknik pertanian berkelanjutan</h2>
+            <div class="section-subhead">Gratis untuk semua! Tingkatkan literasi digital petani, hilangkan kesenjangan pengetahuan desa-kota. Keadilan intelektual merata di tahun 2026.</div>
+        </div>
+        <div class="feature-grid" style="margin-bottom: 48px;">
+            <div class="card">
+                <i class="fas fa-video" style="font-size: 1.8rem; color: #2b6e3c;"></i>
+                <h3>500+ Video Tutorial</h3>
+                <p>Irigasi hemat air, drone pertanian, dan lainnya.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-newspaper" style="font-size: 1.8rem; color: #2b6e3c;"></i>
+                <h3>900+ Artikel</h3>
+                <p>Pertanian regeneratif, agroforestri, manajemen panen.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-mobile-screen-button" style="font-size: 1.8rem; color: #2b6e3c;"></i>
+                <h3>Belajar Offline</h3>
+                <p>Simpan materi tanpa kuota untuk daerah terpencil.</p>
+            </div>
+        </div>
+
+        <!-- QR CODE & WEBSITE LINK SECTION -->
+        <div class="qr-section">
+            <h3><i class="fas fa-qrcode"></i> Akses Sipadi.id dengan mudah</h3>
+            <p style="margin-bottom: 20px;">Scan QR Code berikut untuk langsung membuka website ini di smartphone, atau salin linknya.</p>
+            <div class="qr-container">
+                <div class="qr-box">
+                    <div id="qrcode"></div>
+                    <button id="downloadQR" class="btn-download"><i class="fas fa-download"></i> Download QR Code</button>
+                </div>
+                <div class="site-link-card">
+                    <i class="fas fa-globe" style="font-size: 2rem; color:#2b6e3c;"></i>
+                    <div>
+                        <strong>Website Resmi Sipadi.id</strong><br>
+                        <a href="#" id="dynamicLink" style="font-size: 1.2rem; font-weight: 600; word-break: break-all; color:#1f542d;" target="_blank">https://sipadi.id</a>
+                        <div style="margin-top: 12px;">
+                            <button id="copyLinkBtn" class="btn-outline" style="padding: 6px 16px;"><i class="fas fa-copy"></i> Salin Link</button>
+                            <button id="shareBtn" class="btn-outline" style="padding: 6px 16px;"><i class="fas fa-share-alt"></i> Bagikan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 24px; font-size: 0.85rem; color: #4a6741;"><i class="fas fa-info-circle"></i> Gunakan QR ini untuk berbagi ke petani, koperasi, atau konsumen agar langsung terhubung ke platform.</p>
+        </div>
+
+        <div style="margin-top: 32px; text-align: center;">
+            <a href="#" class="btn-primary"><i class="fas fa-play-circle"></i> Mulai Belajar Gratis Sekarang</a>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-soft-green">
+    <div class="container" style="text-align: center;">
+        <h2>Bergabung dengan revolusi pertanian cerdas & berkeadilan</h2>
+        <div style="margin-top: 48px;">
+            <a href="#" class="btn-primary"><i class="fas fa-user-plus"></i> Daftar Sebagai Petani</a>
+            <a href="#" class="btn-outline" style="margin-left: 16px;"><i class="fas fa-shopping-cart"></i> Daftar Konsumen</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px;">
+            <div>
+                <div class="logo" style="color: #cbe5c2;">sipadi<span style="color:#f4b942;">.id</span></div>
+                <p style="margin-top: 12px;">Pusat kendali pertanian berkelanjutan, transparan, dan memberdayakan petani digital 2026.</p>
+            </div>
+            <div>
+                <h4 style="color: white;">Platform</h4>
+                <p><a href="#">Dashboard Petani</a></p>
+                <p><a href="#">Marketplace</a></p>
+                <p><a href="#">E-Learning</a></p>
+            </div>
+            <div>
+                <h4 style="color: white;">Kontak</h4>
+                <p><i class="fas fa-envelope"></i> hello@sipadi.id</p>
+                <p><i class="fab fa-whatsapp"></i> +62 812 3456 7890</p>
+            </div>
+        </div>
+        <hr style="border-color: #2f583a; margin: 32px 0 24px;">
+        <p style="text-align: center;">© 2026 Sipadi.id — Mewujudkan keadilan intelektual & pertanian cerdas untuk semua kalangan.</p>
+    </div>
+</footer>
+
+<script>
+    // Mendapatkan URL lengkap dari halaman ini (dinamis)
+    const currentUrl = window.location.href;
+    // Tampilkan link di elemen #dynamicLink
+    const linkElement = document.getElementById('dynamicLink');
+    if (linkElement) {
+        linkElement.href = currentUrl;
+        linkElement.textContent = currentUrl;
+    }
+
+    // Generate QR Code menggunakan library QRCode.js
+    const qrcodeDiv = document.getElementById("qrcode");
+    // Hapus child jika ada sebelumnya
+    while (qrcodeDiv.firstChild) {
+        qrcodeDiv.removeChild(qrcodeDiv.firstChild);
+    }
+    new QRCode(qrcodeDiv, {
+        text: currentUrl,
+        width: 180,
+        height: 180,
+        colorDark: "#1f542d",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Download QR Code sebagai gambar PNG
+    document.getElementById("downloadQR").addEventListener("click", function() {
+        const qrCanvas = document.querySelector("#qrcode canvas");
+        if (qrCanvas) {
+            const link = document.createElement('a');
+            link.download = 'sipadi_qrcode.png';
+            link.href = qrCanvas.toDataURL("image/png");
+            link.click();
+        } else {
+            alert("QR Code belum siap, coba refresh halaman.");
+        }
+    });
+
+    // Copy link ke clipboard
+    document.getElementById("copyLinkBtn").addEventListener("click", function() {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            alert("Link website berhasil disalin! 🌾 Bagikan ke petani & komunitas.");
+        }).catch(() => {
+            alert("Gagal menyalin, silakan salin manual.");
+        });
+    });
+
+    // Share link (jika support Web Share API)
+    document.getElementById("shareBtn").addEventListener("click", function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Sipadi.id - Pusat Kendali Pertanian Cerdas',
+                text: 'Akses dashboard petani, marketplace traceability, e-learning gratis & pembayaran syariah.',
+                url: currentUrl,
+            }).catch(console.log);
+        } else {
+            alert("Bagikan link ini: " + currentUrl);
+        }
+    });
+</script>
+</body>
+</html>
